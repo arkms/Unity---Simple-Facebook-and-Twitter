@@ -22,3 +22,5 @@ NOTE:
 ----
 In Androids with Twitter can use the Twitter APP and for follow you can call Facebook APP
 In iOS can use Native Facebook and Twitter APP
+
+Any problem can ask in Issues
