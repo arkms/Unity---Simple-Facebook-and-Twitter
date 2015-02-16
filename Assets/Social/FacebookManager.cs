@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define WEBONLY
+
+using UnityEngine;
 
 namespace Social
 {
@@ -66,10 +68,10 @@ namespace Social
         /// <param name="_ForceWeb">Force use web //Only in Android</param>
         public static void LikeGame(bool _ForceWeb= false)
         {
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !WEBONLY && !UNITY_EDITOR
             if (!_ForceWeb && CheckFacebookAppIsPresent())
             {
-                Application.OpenURL("fb://profile/"+ FacebookPageID); //use facebook app
+                Application.OpenURL("fb://page/"+ FacebookPageID); //use facebook app
             }
             else//is not facebook app
             {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define WEBONLY
+
+using UnityEngine;
 using System.Collections;
 
 namespace Social
@@ -17,8 +19,8 @@ namespace Social
         /// </summary>
         /// <param name="_text">Text to post //limit 140 characters</param>
         /// <param name="_addInfo">Add name and link of the game</param>
-        /// <param name="_HashGame">HashTag of Game if have one</param>
-        /// <param name="_forceWeb">Use native Twiiter or force use web</param>
+        /// <param name="_HashGame">HashTag of Game if have one //Only web</param>
+        /// <param name="_forceWeb">Use native Twiiter or force use web //for Android and iOS</param>
         /// <param name="lang">lenguage in twitter,, //Only for web version</param>
         public static void Share(string _text, bool _addInfo= false, string _HashGame="", bool _forceWeb = false, string lang = "en")
         {
@@ -33,7 +35,7 @@ namespace Social
                 return;
             }
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR && !WEBONLY
             if (!_forceWeb && CheckTwitterAppIsPresent())
             {
                 SocialPost.twitter(_text);
@@ -44,7 +46,7 @@ namespace Social
                 ((_HashGame != "") ? ("&amp;via=" + WWW.EscapeURL(_HashGame)) : "") +
                 "&amp;lang=" + WWW.EscapeURL(lang));
             }
-#elif UNITY_IPHONE && !UNITY_EDITOR
+#elif UNITY_IPHONE && !UNITY_EDITOR && !WEBONLY
             if (!_forceWeb)
             {
                 SocialPost.twitter(_text);
